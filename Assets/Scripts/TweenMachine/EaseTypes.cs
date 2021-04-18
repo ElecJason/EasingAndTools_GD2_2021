@@ -1,11 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum EaseTypes
+﻿public enum EaseTypes
 {
-    EaseInQuad,
-    EaseInCubic,
-    EaseInQuart,
-    EaseInQuint
+    easeInSine,
+    easeOutSine,
+    easeInOutSine,
+
+    easeInCubic,
+    easeOutCubic,
+    easeInOutCubic,
+
+    easeInQuint,
+    easeOutQuint,
+    easeInOutQuint,
+
+    easeInCirc,
+    easeOutCirc,
+    easeInOutCirc,
+
+    easeInElastic,
+    easeOutElastic,
+    easeInOutElastic,
+
+    easeInQuad,
+    easeOutQuad,
+    easeInOutQuad,
+
+    easeInQuart,
+    easeOutQuart,
+    easeInOutQuart,
+
+    easeInExpo,
+    easeOutExpo,
+    easeInOutExpo,
+
+    easeInBack,
+    easeOutBack,
+    easeInOutBack,
+
+    easeInBounce,
+    easeOutBounce,
+    easeInOutBounce,
 }
