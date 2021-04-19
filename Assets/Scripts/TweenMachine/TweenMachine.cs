@@ -80,24 +80,25 @@ public class TweenMachine : MonoBehaviour
         }
     }
 
-    public void MoveGameObject(GameObject objectToMove, Vector3 targetPosition, float speed, EaseTypes type)
+
+    public void MoveGameObject(GameObject objectToMove, Vector3 targetPosition, float speed, EaseTypes type, Action TweenComplete, Action TweenUpdate)
     {
         Debug.Log(type);
-        TweenPosition newTween = new TweenPosition(objectToMove, targetPosition, speed, easingCombiner[type]);
+        TweenPosition newTween = new TweenPosition(objectToMove, targetPosition, speed, easingCombiner[type], TweenComplete, TweenUpdate);
         _activeTweens.Add(newTween);
     }
 
-    public void RotateGameObject(GameObject objectRotate, Vector3 targetRotation, float rotationSpeed, EaseTypes type)
+    public void RotateGameObject(GameObject objectRotate, Vector3 targetRotation, float rotationSpeed, EaseTypes type, Action TweenComplete, Action TweenUpdate)
     {
         Debug.Log(type);
-        TweenRotate newTween = new TweenRotate(objectRotate, targetRotation, rotationSpeed, easingCombiner[type]);
+        TweenRotate newTween = new TweenRotate(objectRotate, targetRotation, rotationSpeed, easingCombiner[type], TweenComplete, TweenUpdate);
         _activeTweens.Add(newTween);
     }
 
-    public void ScaleGameObject(GameObject objectRotate, Vector3 targetScale, float scaleSpeed, EaseTypes type)
+    public void ScaleGameObject(GameObject objectRotate, Vector3 targetScale, float scaleSpeed, EaseTypes type, Action TweenComplete, Action TweenUpdate)
     {
         Debug.Log(type);
-        TweenScale newTween = new TweenScale(objectRotate, targetScale, scaleSpeed, easingCombiner[type]);
+        TweenScale newTween = new TweenScale(objectRotate, targetScale, scaleSpeed, easingCombiner[type], TweenComplete, TweenUpdate);
         _activeTweens.Add(newTween);
     }
 

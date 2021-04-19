@@ -14,12 +14,20 @@ public class TweenRotate : Tween
     }
     protected override void OnTweenComplete()
     {
+        base.OnTweenComplete();
         _gameObject.transform.rotation = Quaternion.Euler(_targetRotation);
     }
 
-    public TweenRotate(GameObject objectToMove, Vector3 targetRotation, float speed, Func<float, float> easeMethod) : base(objectToMove, speed, easeMethod)
+    protected override void OnTweenStart()
+    {
+        base.OnTweenStart();
+    }
+
+    public TweenRotate(GameObject objectToMove, Vector3 targetRotation, float speed, Func<float, float> easeMethod, Action OnComplete, Action OnStart) : base(objectToMove, speed, easeMethod)
     {
         _targetRotation = targetRotation;
         _direction = targetRotation - _gameObject.transform.rotation.eulerAngles;
+        OnTweenCompleteAction += OnComplete;
+        OnTweenStartAction += OnStart;
     }
 }

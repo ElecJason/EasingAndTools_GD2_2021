@@ -13,6 +13,9 @@ public class Tween
 
     private Func<float, float> EaseMethod;
 
+    public Action OnTweenCompleteAction;
+    public Action OnTweenStartAction;
+
     private bool isFinished = false;
     
     public Tween(GameObject objectToMove, float speed, Func<float, float> easeMethod)
@@ -29,6 +32,8 @@ public class Tween
     }
     public void UpdateTween(float dt)
     {
+        OnTweenStart();
+
         _percent += dt / _speed;
 
         if (_percent < 1)
@@ -42,8 +47,6 @@ public class Tween
         {
             OnTweenComplete();
             isFinished = true;
-            Debug.Log("Tween Finished!");
-
         }
     }
 
@@ -54,7 +57,14 @@ public class Tween
 
     protected virtual void OnTweenComplete()
     {
+        if (OnTweenCompleteAction != null)
+            OnTweenCompleteAction();
+    }
 
+    protected virtual void OnTweenStart()
+    {
+        if (OnTweenStartAction != null)
+            OnTweenStartAction();
     }
 
     public bool IsFinished()

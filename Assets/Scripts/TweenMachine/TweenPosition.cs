@@ -14,12 +14,21 @@ public class TweenPosition : Tween
     }
     protected override void OnTweenComplete()
     {
+        base.OnTweenComplete();
         _gameObject.transform.position = _targetPosition;
     }
 
-    public TweenPosition(GameObject objectToMove, Vector3 targetPosition, float speed, Func<float, float> easeMethod) : base(objectToMove, speed, easeMethod)
+    protected override void OnTweenStart()
+    {
+        base.OnTweenStart();
+    }
+
+    public TweenPosition(GameObject objectToMove, Vector3 targetPosition, float speed, Func<float, float> easeMethod, Action OnComplete, Action OnTweenStart) : base(objectToMove, speed, easeMethod)
     {
         _targetPosition = targetPosition;
         _direction = targetPosition - _startPosition;
+        OnTweenCompleteAction += OnComplete;
+        OnTweenStartAction += OnTweenStart;
+
     }
 }

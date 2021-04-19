@@ -14,11 +14,19 @@ public class TweenScale : Tween
     }
     protected override void OnTweenComplete()
     {
-        //_gameObject.transform.localScale = _targetScale;
+        base.OnTweenComplete();
+        _gameObject.transform.localScale = _targetScale;
     }
 
-    public TweenScale(GameObject objectToMove, Vector3 targetScale, float speed, Func<float, float> easeMethod) : base(objectToMove, speed, easeMethod)
+    protected override void OnTweenStart()
+    {
+        base.OnTweenStart();
+    }
+
+    public TweenScale(GameObject objectToMove, Vector3 targetScale, float speed, Func<float, float> easeMethod, Action OnComplete, Action OnTweenStart) : base(objectToMove, speed, easeMethod)
     {
         _targetScale = targetScale;
+        OnTweenCompleteAction += OnComplete;
+        OnTweenStartAction += OnTweenStart;
     }
 }
