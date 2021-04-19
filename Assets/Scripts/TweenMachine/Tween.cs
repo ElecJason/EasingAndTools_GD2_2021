@@ -12,6 +12,8 @@ public class Tween
     private float _percent;
 
     private Func<float, float> EaseMethod;
+
+    private bool isFinished = false;
     
     public Tween(GameObject objectToMove, float speed, Func<float, float> easeMethod)
     {
@@ -39,7 +41,9 @@ public class Tween
         else
         {
             OnTweenComplete();
+            isFinished = true;
             Debug.Log("Tween Finished!");
+
         }
     }
 
@@ -51,5 +55,10 @@ public class Tween
     protected virtual void OnTweenComplete()
     {
 
+    }
+
+    public bool IsFinished()
+    {
+        return isFinished;
     }
 }

@@ -70,6 +70,13 @@ public class TweenMachine : MonoBehaviour
         for (int i = 0; i < _activeTweens.Count; i++)
         {
             _activeTweens[i].UpdateTween(Time.deltaTime);
+
+            if(_activeTweens[i].IsFinished())
+            {
+                _activeTweens.RemoveAt(i);
+                i -= 1;
+                Debug.Log("Removed finished tween.");
+            }
         }
     }
 
@@ -80,12 +87,20 @@ public class TweenMachine : MonoBehaviour
         _activeTweens.Add(newTween);
     }
 
-    public void RotateGameObject(GameObject objectRotate, Vector3 targetRotation, float RotationSpeed, EaseTypes type)
+    public void RotateGameObject(GameObject objectRotate, Vector3 targetRotation, float rotationSpeed, EaseTypes type)
     {
         Debug.Log(type);
-        TweenRotate newTween = new TweenRotate(objectRotate, targetRotation, RotationSpeed, easingCombiner[type]);
+        TweenRotate newTween = new TweenRotate(objectRotate, targetRotation, rotationSpeed, easingCombiner[type]);
         _activeTweens.Add(newTween);
     }
+
+    public void ScaleGameObject(GameObject objectRotate, Vector3 targetScale, float scaleSpeed, EaseTypes type)
+    {
+        Debug.Log(type);
+        TweenScale newTween = new TweenScale(objectRotate, targetScale, scaleSpeed, easingCombiner[type]);
+        _activeTweens.Add(newTween);
+    }
+
     public static TweenMachine GetInstance()
     {
         return instance;
